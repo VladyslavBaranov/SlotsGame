@@ -1,0 +1,19 @@
+{
+    "game-list": [
+        {
+            "name": "Slot Game 1",
+            "icon": "slot-game-1",
+            "played-count-worldwide": 1000000
+        },
+        {
+            "name": "Slot Game 2",
+            "icon": "slot-game-2",
+            "played-count-worldwide": 1000
+        },
+        {
+            "name": "Slot Game 3",
+            "icon": "slot-game-3",
+            "played-count-worldwide": 1000
+        },
+    ]
+}
