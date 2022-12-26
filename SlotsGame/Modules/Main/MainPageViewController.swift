@@ -8,10 +8,28 @@
 import SwiftUI
 
 final class MainPageViewController: UIHostingController<MainPage> {
+    
+    override init(rootView: MainPage) {
+        super.init(rootView: rootView)
+        self.rootView.didTapGame = { [weak self] game in
+            let vc = GamePageViewController(rootView: .init())
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
+        }
+    }
+    
+    @MainActor required dynamic init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         displayPreloader()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // OrientationLock.lockOrientation(.portrait)
     }
 }
 

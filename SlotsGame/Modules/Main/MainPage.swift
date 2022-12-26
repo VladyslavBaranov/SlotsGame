@@ -40,6 +40,8 @@ struct MainPage: View {
     
     private let gridSidePadding: CGFloat = 34.0
     
+    var didTapGame: ((Game) -> ())?
+    
     var body: some View {
         VStack {
             HStack {
@@ -57,7 +59,7 @@ struct MainPage: View {
                         RoundedRectangle(cornerRadius: 3)
                             .fill(Color(red: 0.17, green: 0.16, blue: 0.21))
                             .frame(width: 130, height: 26)
-                        Text("123456")
+                        Text(123456.formattedWithSeparator)
                             .font(.system(size: 18, weight: .bold))
                     }
                     .zIndex(0)
@@ -101,17 +103,22 @@ struct MainPage: View {
                             ColSpan(span: true) {
                                 Image(game.iconName)
                                     .resizable()
-                                // Color.red
                                     .frame(
                                         width: UIScreen.main.bounds.width - gridSidePadding * 2,
                                         height: getGridItemHeight()
                                     )
+                            }
+                            .onTapGesture {
+                                didTapGame?(game)
                             }
                         } else {
                             ColSpan(span: false) {
                                 Image(game.iconName)
                                     .resizable()
                                     .frame(height: getGridItemHeight())
+                            }
+                            .onTapGesture {
+                                didTapGame?(game)
                             }
                         }
                     }
