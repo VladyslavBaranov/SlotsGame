@@ -16,6 +16,8 @@ fileprivate struct SideBarShape: Shape {
 
 struct GamePage: View {
     
+    @State var boardOffset: CGFloat = -min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+    
     @State var chestOffset: CGFloat = 250
     @State var spinnerOffset: CGFloat = 250
     @State var hstackOffset: CGFloat = 250
@@ -44,8 +46,17 @@ struct GamePage: View {
                 }
                 Spacer()
             }
-            HStack {
-                Spacer()
+            HStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    WheelView()
+                    WheelView()
+                    WheelView()
+                    WheelView()
+                    WheelView()
+                }
+                .padding(EdgeInsets(top: 55, leading: 90, bottom: 55, trailing: 35))
+                .offset(y: boardOffset)
+                .opacity(chestOffset == 0 ? 1 : 0)
                 ZStack {
                     Color.black
                         .opacity(0.5)
@@ -135,12 +146,16 @@ struct GamePage: View {
                     .offset(x: -10)
                 }
             }
+            
+            
+            
         }
         .ignoresSafeArea()
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000)) {
                 withAnimation(.spring()) {
                     chestOffset = 0
+                    boardOffset = 0
                 }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {

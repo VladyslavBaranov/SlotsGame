@@ -3,7 +3,10 @@
         {
             "name": "Slot Game 1",
             "icon": "slot-game-1",
-            "played-count-worldwide": 1000000
+            "played-count-worldwide": 1000000,
+            "slot-icon-names": [
+                "sg-1", "sg-2", "sg-3", "sg-4", "sg-5", "sg-6", "sg-7", "sg-8", "sg-9"
+            ]
         },
         {
             "name": "Slot Game 2",
