@@ -13,6 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Initiation of fake bank volume
+        
+        if KeyStore.getInteger(for: .bankValue) == nil {
+            KeyStore.save(value: 123456, for: .bankValue)
+        }
+        
+        
         // Override point for customization after application launch.
         return true
     }

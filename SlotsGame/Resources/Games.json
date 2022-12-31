@@ -5,18 +5,24 @@
             "icon": "slot-game-1",
             "played-count-worldwide": 1000000,
             "slot-icon-names": [
-                "sg-1", "sg-2", "sg-3", "sg-4", "sg-5", "sg-6", "sg-7", "sg-8", "sg-9"
+                "ss1-1", "ss1-2", "ss1-3", "ss1-4", "ss1-5", "ss1-6", "ss1-7", "ss1-8", "ss1-9"
             ]
         },
         {
             "name": "Slot Game 2",
             "icon": "slot-game-2",
-            "played-count-worldwide": 1000
+            "played-count-worldwide": 1000,
+            "slot-icon-names": [
+                "ss2-1", "ss2-2", "ss2-3", "ss2-4", "ss2-5", "ss2-6", "ss2-7", "ss2-8", "ss2-9"
+            ]
         },
         {
             "name": "Slot Game 3",
             "icon": "slot-game-3",
-            "played-count-worldwide": 1000
-        },
+            "played-count-worldwide": 1000,
+            "slot-icon-names": [
+                "ss3-1", "ss3-2", "ss3-3", "ss3-4", "ss3-5", "ss3-6", "ss3-7", "ss3-8", "ss3-9"
+            ]
+        }
     ]
 }

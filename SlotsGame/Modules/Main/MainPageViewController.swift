@@ -9,9 +9,14 @@ import SwiftUI
 
 final class MainPageViewController: UIHostingController<MainPage> {
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        .portrait
+    }
+    
     override init(rootView: MainPage) {
         super.init(rootView: rootView)
         self.rootView.didTapGame = { [weak self] game in
+            SlotItemCache.shared.resetCache(game.iconNames)
             let vc = GamePageViewController(rootView: .init())
             vc.modalPresentationStyle = .fullScreen
             self?.present(vc, animated: true)
@@ -29,7 +34,6 @@ final class MainPageViewController: UIHostingController<MainPage> {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // OrientationLock.lockOrientation(.portrait)
     }
 }
 

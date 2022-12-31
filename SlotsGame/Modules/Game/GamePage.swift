@@ -16,11 +16,13 @@ fileprivate struct SideBarShape: Shape {
 
 struct GamePage: View {
     
-    @State var boardOffset: CGFloat = -min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+    @State private var boardOffset: CGFloat = -min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
     
-    @State var chestOffset: CGFloat = 250
-    @State var spinnerOffset: CGFloat = 250
-    @State var hstackOffset: CGFloat = 250
+    @State private var chestOffset: CGFloat = 250
+    @State private var spinnerOffset: CGFloat = 250
+    @State private var hstackOffset: CGFloat = 250
+    
+    @State private var animationIsActive = false
     
     @State private var isRotating = 0.0
     
@@ -47,12 +49,12 @@ struct GamePage: View {
                 Spacer()
             }
             HStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    WheelView()
-                    WheelView()
-                    WheelView()
-                    WheelView()
-                    WheelView()
+                VStack(spacing: 10) {
+                    SlotBoardView()
+                    Text("WIN: +\(state.score)")
+                        .foregroundColor(.white)
+                        .font(.system(size: 22, weight: .bold))
+                        .opacity(state.score >= 0 ? 1 : 0)
                 }
                 .padding(EdgeInsets(top: 55, leading: 90, bottom: 55, trailing: 35))
                 .offset(y: boardOffset)
@@ -77,7 +79,7 @@ struct GamePage: View {
                                         ], startPoint: .leading, endPoint: .trailing)
                                     )
                                     .frame(width: 170, height: 30)
-                                Text(123456.formattedWithSeparator)
+                                Text(state.bankVolume.formattedWithSeparator)
                                     .font(.system(size: 22, weight: .bold))
                                     .foregroundColor(.black)
                             }
@@ -90,21 +92,32 @@ struct GamePage: View {
                             Image("spinner")
                                 .resizable()
                                 .frame(width: 150, height: 150)
-                            // .rotationEffect(.degrees(isRotating))
-                            // .onAppear {
-                            //    withAnimation(.linear(duration: 1)
-                            //        .speed(1).repeatForever(autoreverses: false)) {
-                            //            isRotating = 360.0
-                            //        }
-                            // }
+                                .rotationEffect(.degrees(isRotating))
+                                .onAppear {
+                                    withAnimation(
+                                        .linear(duration: 1)
+                                        .speed(1).repeatForever(autoreverses: false)
+                                    ) {
+                                        isRotating = 360.0
+                                    }
+                                }
                                 .offset(y: -12.5)
+                                .opacity(state.isSpinning ? 1 : 0)
+                            
+                            Image("spinner")
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                                .offset(y: -12.5)
+                                .opacity(state.isSpinning ? 0 : 1)
+                            
                             Button {
-                                
+                                state.beginSpinning()
                             } label: {
                                 Text("SPIN")
                                     .foregroundColor(.white)
                                     .font(.system(size: 38, weight: .bold))
                                     .offset(y: -12.5)
+                                    .disabled(!state.isSpinning)
                             }
                         }
                         .offset(x: spinnerOffset)

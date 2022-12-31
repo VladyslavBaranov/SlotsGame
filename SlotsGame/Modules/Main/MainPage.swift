@@ -59,7 +59,7 @@ struct MainPage: View {
                         RoundedRectangle(cornerRadius: 3)
                             .fill(Color(red: 0.17, green: 0.16, blue: 0.21))
                             .frame(width: 130, height: 26)
-                        Text(123456.formattedWithSeparator)
+                        Text(state.bankVolume.formattedWithSeparator)
                             .font(.system(size: 18, weight: .bold))
                     }
                     .zIndex(0)
@@ -129,6 +129,9 @@ struct MainPage: View {
             .clipShape(MainPageGamesClipShape())
         }
         .ignoresSafeArea(.all, edges: .bottom)
+        .onAppear {
+            state.bankVolume = KeyStore.getInteger(for: .bankValue) ?? 123456
+        }
     }
     
     private func getGridItemHeight() -> CGFloat {

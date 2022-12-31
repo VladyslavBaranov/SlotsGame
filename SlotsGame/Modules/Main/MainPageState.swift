@@ -13,11 +13,13 @@ struct Game: Codable {
         case name = "name"
         case iconName = "icon"
         case playedCountWorldWide = "played-count-worldwide"
+        case iconNames = "slot-icon-names"
     }
     
     var name: String
     var iconName: String
     var playedCountWorldWide: Int
+    var iconNames: [String]
     
     var isPopular: Bool {
         playedCountWorldWide > 10000
@@ -35,6 +37,8 @@ fileprivate struct GameObject: Codable {
 }
 
 final class MainPageState: ObservableObject {
+    
+    @Published var bankVolume = KeyStore.getInteger(for: .bankValue) ?? 123456
     
     var gameList: [Game] = []
     
