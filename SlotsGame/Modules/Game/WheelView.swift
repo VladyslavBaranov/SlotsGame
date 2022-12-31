@@ -20,7 +20,10 @@ class WheelUIViewCell: UIView {
     }
     
     override func layoutSubviews() {
-        imageView.frame = bounds.insetBy(dx: 9, dy: 9)
+        let screenSize = UIScreen.main.bounds.size
+        let maxDimension = max(screenSize.width, screenSize.height)
+        let inset: CGFloat = maxDimension < 800 ? 0 : 9
+        imageView.frame = bounds.insetBy(dx: inset, dy: inset)
     }
     
     required init?(coder: NSCoder) {
